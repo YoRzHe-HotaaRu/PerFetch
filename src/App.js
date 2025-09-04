@@ -31,7 +31,6 @@ import MemoryCard from './components/MemoryCard';
 import GraphicsCard from './components/GraphicsCard';
 import StorageCard from './components/StorageCard';
 import SystemInfoCard from './components/SystemInfoCard';
-import TemperatureChart from './components/TemperatureChart';
 import './App.css';
 
 const theme = createTheme({
@@ -238,11 +237,6 @@ function App() {
     </ThemeProvider>
   );
 
-  // Prepare data for temperature chart
-  const tempData = [
-    { name: 'CPU', temperature: systemSpecs.cpu.temperature },
-    { name: 'System', temperature: systemSpecs.cpu.temperature },
-  ];
 
   return (
     <ThemeProvider theme={theme}>
@@ -368,39 +362,30 @@ function App() {
             </Grid>
           </Grid>
           
-          {/* Main Cards - Row 1: SystemInfo and Memory */}
+          {/* Main Cards - Row 1: SystemInfo, CPU, GPU, Memory */}
           <Grid container spacing={3} mb={3} width="100%">
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6} md={3}>
               <SystemInfoCard os={systemSpecs.os} />
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} sm={6} md={3}>
+              <CPUCard cpu={systemSpecs.cpu} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
+              <GraphicsCard graphics={systemSpecs.graphics} />
+            </Grid>
+            <Grid item xs={12} sm={6} md={3}>
               <MemoryCard memory={systemSpecs.memory} />
             </Grid>
           </Grid>
           
-          {/* Main Cards - Row 2: CPU and Graphics */}
-          <Grid container spacing={3} mb={3} width="100%">
-            <Grid item xs={12} md={6}>
-              <CPUCard cpu={systemSpecs.cpu} />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <GraphicsCard graphics={systemSpecs.graphics} />
-            </Grid>
-          </Grid>
-          
-          {/* Main Cards - Row 3: Storage */}
+          {/* Main Cards - Row 2: Storage */}
           <Grid container spacing={3} mb={3} width="100%">
             <Grid item xs={12}>
               <StorageCard storage={systemSpecs.storage} />
             </Grid>
           </Grid>
           
-          {/* Main Cards - Row 4: Temperature Chart */}
-          <Grid container spacing={3} width="100%">
-            <Grid item xs={12}>
-              <TemperatureChart data={tempData} />
-            </Grid>
-          </Grid>
+          
         </Container>
       </Box>
     </ThemeProvider>

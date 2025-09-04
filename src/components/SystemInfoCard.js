@@ -8,32 +8,27 @@ const SystemInfoCard = React.memo(({ os }) => {
       <CardContent sx={{ flexGrow: 1 }}>
         <Box display="flex" alignItems="center" mb={2}>
           <FaDesktop color="#2c3e50" size={24} style={{ marginRight: 8 }} />
-          <Typography variant="h5">System Information</Typography>
+          <Typography variant="h5">System</Typography>
         </Box>
         
-        <Box mb={2}>
+        <Box mb={1}>
           <Typography variant="body2" color="textSecondary">Platform</Typography>
-          <Typography variant="body1">{os.platform}</Typography>
+          <Typography variant="body1" noWrap>{os.platform}</Typography>
         </Box>
         
-        <Box mb={2}>
-          <Typography variant="body2" color="textSecondary">Distribution</Typography>
-          <Typography variant="body1">{os.distro || os.hostname}</Typography>
+        <Box mb={1}>
+          <Typography variant="body2" color="textSecondary">OS</Typography>
+          <Typography variant="body1" noWrap>{os.distro || os.hostname}</Typography>
         </Box>
         
-        <Box mb={2}>
+        <Box mb={1}>
           <Typography variant="body2" color="textSecondary">Release</Typography>
-          <Typography variant="body1">{os.release}</Typography>
-        </Box>
-        
-        <Box mb={2}>
-          <Typography variant="body2" color="textSecondary">Kernel</Typography>
-          <Typography variant="body1">{os.kernel}</Typography>
+          <Typography variant="body1" noWrap>{os.release}</Typography>
         </Box>
         
         <Box>
-          <Typography variant="body2" color="textSecondary">Architecture</Typography>
-          <Typography variant="body1">{os.arch}</Typography>
+          <Typography variant="body2" color="textSecondary">Arch</Typography>
+          <Typography variant="body1" noWrap>{os.arch}</Typography>
         </Box>
       </CardContent>
     </Card>
