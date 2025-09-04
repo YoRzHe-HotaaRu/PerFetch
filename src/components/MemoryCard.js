@@ -1,16 +1,15 @@
 import React from 'react';
 import { Card, CardContent, Typography, LinearProgress, Box } from '@mui/material';
-import { motion } from 'framer-motion';
 import { FaMemory, FaChartPie } from 'react-icons/fa';
 
 const MemoryCard = React.memo(({ memory }) => {
   const usedPercentage = (memory.used / memory.total) * 100;
   
   return (
-    <Card sx={{ height: '100%' }}>
-      <CardContent>
+    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <CardContent sx={{ flexGrow: 1 }}>
         <Box display="flex" alignItems="center" mb={2}>
-          <FaMemory color="#ff4081" size={24} style={{ marginRight: 8 }} />
+          <FaMemory color="#2c3e50" size={24} style={{ marginRight: 8 }} />
           <Typography variant="h5">Memory Information</Typography>
         </Box>
         
@@ -31,7 +30,7 @@ const MemoryCard = React.memo(({ memory }) => {
         
         <Box>
           <Box display="flex" alignItems="center" mb={1}>
-            <FaChartPie color="#64ffda" style={{ marginRight: 8 }} />
+            <FaChartPie color="#3498db" style={{ marginRight: 8 }} />
             <Typography variant="body2" color="textSecondary">Memory Usage</Typography>
           </Box>
           <Typography variant="body1" mb={1}>
@@ -43,9 +42,9 @@ const MemoryCard = React.memo(({ memory }) => {
             sx={{ 
               height: 8, 
               borderRadius: 4,
-              backgroundColor: 'rgba(255, 255, 255, 0.1)',
+              backgroundColor: '#e1e8ed',
               '& .MuiLinearProgress-bar': {
-                backgroundColor: '#ff4081',
+                backgroundColor: '#3498db',
               }
             }} 
           />

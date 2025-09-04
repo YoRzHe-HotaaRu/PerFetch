@@ -4,17 +4,17 @@ import { FaDesktop } from 'react-icons/fa';
 
 const GraphicsCard = React.memo(({ graphics }) => {
   return (
-    <Card sx={{ height: '100%' }}>
-      <CardContent>
+    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <CardContent sx={{ flexGrow: 1 }}>
         <Box display="flex" alignItems="center" mb={2}>
-          <FaDesktop color="#64ffda" size={24} style={{ marginRight: 8 }} />
+          <FaDesktop color="#2c3e50" size={24} style={{ marginRight: 8 }} />
           <Typography variant="h5">Graphics Information</Typography>
         </Box>
         
         <List disablePadding>
           {graphics.controllers.map((controller, index) => (
             <Box key={index} mb={index < graphics.controllers.length - 1 ? 2 : 0}>
-              <Typography variant="h6" color="#00e5ff" gutterBottom>
+              <Typography variant="h6" color="#3498db" gutterBottom>
                 GPU {index + 1}
               </Typography>
               

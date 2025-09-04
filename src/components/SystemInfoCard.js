@@ -1,13 +1,13 @@
 import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
-import { FaDesktop, FaWindows } from 'react-icons/fa';
+import { FaDesktop } from 'react-icons/fa';
 
 const SystemInfoCard = React.memo(({ os }) => {
   return (
-    <Card sx={{ height: '100%' }}>
-      <CardContent>
+    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <CardContent sx={{ flexGrow: 1 }}>
         <Box display="flex" alignItems="center" mb={2}>
-          <FaDesktop color="#ff4081" size={24} style={{ marginRight: 8 }} />
+          <FaDesktop color="#2c3e50" size={24} style={{ marginRight: 8 }} />
           <Typography variant="h5">System Information</Typography>
         </Box>
         

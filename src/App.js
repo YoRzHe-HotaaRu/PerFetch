@@ -12,7 +12,8 @@ import {
   Paper,
   Box,
   IconButton,
-  Tooltip
+  Tooltip,
+  Divider
 } from '@mui/material';
 import { 
   FaMicrochip, 
@@ -22,9 +23,9 @@ import {
   FaThermometerHalf, 
   FaSync,
   FaPause,
-  FaPlay
+  FaPlay,
+  FaInfoCircle
 } from 'react-icons/fa';
-import { motion } from 'framer-motion';
 import CPUCard from './components/CPUCard';
 import MemoryCard from './components/MemoryCard';
 import GraphicsCard from './components/GraphicsCard';
@@ -35,51 +36,55 @@ import './App.css';
 
 const theme = createTheme({
   palette: {
-    mode: 'dark',
+    mode: 'light',
     primary: {
-      main: '#00e5ff',
-      light: '#6effff',
-      dark: '#00b2cc',
+      main: '#2c3e50',
+      light: '#34495e',
+      dark: '#1a252f',
     },
     secondary: {
-      main: '#ff4081',
-      light: '#ff79b0',
-      dark: '#c60055',
+      main: '#3498db',
+      light: '#5dade2',
+      dark: '#2874a6',
     },
     background: {
-      default: '#0a0e27',
-      paper: 'rgba(20, 25, 47, 0.7)',
+      default: '#f8f9fa',
+      paper: '#ffffff',
     },
     text: {
-      primary: '#ffffff',
-      secondary: '#b8bcc8',
+      primary: '#2c3e50',
+      secondary: '#7f8c8d',
     },
+    divider: '#e1e8ed',
   },
   typography: {
-    fontFamily: '"Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Inter", "Segoe UI", "Roboto", "Helvetica", "Arial", sans-serif',
     h3: {
-      fontWeight: 700,
-      background: 'linear-gradient(90deg, #00e5ff, #ff4081)',
-      WebkitBackgroundClip: 'text',
-      WebkitTextFillColor: 'transparent',
+      fontWeight: 600,
+      color: '#2c3e50',
     },
     h5: {
       fontWeight: 600,
-      color: '#00e5ff',
+      color: '#2c3e50',
+    },
+    h6: {
+      fontWeight: 600,
+      color: '#3498db',
+    },
+    body2: {
+      color: '#7f8c8d',
     },
   },
   components: {
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 16,
-          backdropFilter: 'blur(10px)',
-          boxShadow: '0 8px 32px rgba(0, 229, 255, 0.1)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-          transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+          borderRadius: 12,
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.05)',
+          border: '1px solid #e1e8ed',
+          transition: 'box-shadow 0.3s ease',
           '&:hover': {
-            transform: 'translateY(-5px)',
-            boxShadow: '0 12px 40px rgba(0, 229, 255, 0.2)',
+            boxShadow: '0 8px 24px rgba(0, 0, 0, 0.08)',
           },
         },
       },
@@ -87,9 +92,17 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 30,
-          padding: '8px 24px',
-          fontWeight: 600,
+          borderRadius: 8,
+          padding: '8px 16px',
+          fontWeight: 500,
+          textTransform: 'none',
+        },
+      },
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          borderColor: '#e1e8ed',
         },
       },
     },
@@ -171,14 +184,14 @@ function App() {
         justifyContent="center" 
         alignItems="center" 
         minHeight="100vh"
-        sx={{ background: 'linear-gradient(135deg, #0a0e27, #1a1f3a)' }}
+        sx={{ backgroundColor: theme.palette.background.default }}
       >
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-        >
-          <FaSync size={48} color="#00e5ff" />
-        </motion.div>
+        <Box textAlign="center">
+          <FaSync size={48} color={theme.palette.primary.main} style={{ animation: 'spin 2s linear infinite' }} />
+          <Typography variant="h6" mt={2} color={theme.palette.text.primary}>
+            Loading System Information
+          </Typography>
+        </Box>
       </Box>
     </ThemeProvider>
   );
@@ -191,7 +204,7 @@ function App() {
         justifyContent="center" 
         alignItems="center" 
         minHeight="100vh"
-        sx={{ background: 'linear-gradient(135deg, #0a0e27, #1a1f3a)' }}
+        sx={{ backgroundColor: theme.palette.background.default }}
       >
         <Paper sx={{ p: 4, maxWidth: 500, textAlign: 'center' }}>
           <Typography variant="h5" color="error" gutterBottom>
@@ -216,7 +229,7 @@ function App() {
         justifyContent="center" 
         alignItems="center" 
         minHeight="100vh"
-        sx={{ background: 'linear-gradient(135deg, #0a0e27, #1a1f3a)' }}
+        sx={{ backgroundColor: theme.palette.background.default }}
       >
         <Typography variant="h5">
           No system information available
@@ -237,53 +250,40 @@ function App() {
       <Box 
         sx={{ 
           minHeight: '100vh', 
-          background: 'linear-gradient(135deg, #0a0e27, #1a1f3a)',
+          backgroundColor: theme.palette.background.default,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
           py: 4,
-          position: 'relative',
-          overflow: 'hidden'
         }}
       >
-        {/* Background decorative elements */}
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '-150px',
-            right: '-150px',
-            width: '400px',
-            height: '400px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(0, 229, 255, 0.1) 0%, rgba(0, 229, 255, 0) 70%)',
-            zIndex: 0,
+        <Container 
+          maxWidth="lg" 
+          sx={{ 
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
-        />
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: '-100px',
-            left: '-100px',
-            width: '300px',
-            height: '300px',
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(255, 64, 129, 0.1) 0%, rgba(255, 64, 129, 0) 70%)',
-            zIndex: 0,
-          }}
-        />
-        
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
+        >
           {/* Header */}
           <Box 
             display="flex" 
             justifyContent="space-between" 
             alignItems="center" 
             mb={4}
+            width="100%"
           >
             <Box>
               <Typography variant="h3" component="h1" gutterBottom>
                 System Dashboard
               </Typography>
-              <Typography variant="body2" color="textSecondary">
-                Last updated: {lastUpdated.toLocaleTimeString()}
-              </Typography>
+              <Box display="flex" alignItems="center">
+                <FaInfoCircle color={theme.palette.text.secondary} size={16} style={{ marginRight: 8 }} />
+                <Typography variant="body2" color="textSecondary">
+                  Last updated: {lastUpdated.toLocaleTimeString()}
+                </Typography>
+              </Box>
             </Box>
             
             <Box display="flex" gap={2}>
@@ -292,8 +292,9 @@ function App() {
                   color="primary" 
                   onClick={() => setIsPaused(!isPaused)}
                   sx={{ 
-                    background: 'rgba(0, 229, 255, 0.1)',
-                    '&:hover': { background: 'rgba(0, 229, 255, 0.2)' }
+                    backgroundColor: theme.palette.background.paper,
+                    border: `1px solid ${theme.palette.divider}`,
+                    '&:hover': { backgroundColor: theme.palette.action.hover }
                   }}
                 >
                   {isPaused ? <FaPlay /> : <FaPause />}
@@ -305,8 +306,9 @@ function App() {
                   color="primary" 
                   onClick={handleRefresh}
                   sx={{ 
-                    background: 'rgba(0, 229, 255, 0.1)',
-                    '&:hover': { background: 'rgba(0, 229, 255, 0.2)' }
+                    backgroundColor: theme.palette.background.paper,
+                    border: `1px solid ${theme.palette.divider}`,
+                    '&:hover': { backgroundColor: theme.palette.action.hover }
                   }}
                 >
                   <FaSync />
@@ -316,140 +318,87 @@ function App() {
           </Box>
           
           {/* Stats Overview */}
-          <Grid container spacing={3} mb={4}>
+          <Grid container spacing={3} mb={4} width="100%">
             <Grid item xs={12} sm={6} md={3}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Paper sx={{ p: 3, display: 'flex', alignItems: 'center' }}>
-                  <Box sx={{ mr: 2, color: '#00e5ff' }}>
-                    <FaMicrochip size={24} />
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" color="textSecondary">CPU</Typography>
-                    <Typography variant="h6">{systemSpecs.cpu.brand.split(' ')[0]}</Typography>
-                  </Box>
-                </Paper>
-              </motion.div>
+              <Paper sx={{ p: 3, display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ mr: 2, color: theme.palette.primary.main }}>
+                  <FaMicrochip size={24} />
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="textSecondary">CPU</Typography>
+                  <Typography variant="h6">{systemSpecs.cpu.brand.split(' ')[0]}</Typography>
+                </Box>
+              </Paper>
             </Grid>
             
             <Grid item xs={12} sm={6} md={3}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
-                <Paper sx={{ p: 3, display: 'flex', alignItems: 'center' }}>
-                  <Box sx={{ mr: 2, color: '#ff4081' }}>
-                    <FaMemory size={24} />
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" color="textSecondary">RAM</Typography>
-                    <Typography variant="h6">{(systemSpecs.memory.total / 1073741824).toFixed(1)} GB</Typography>
-                  </Box>
-                </Paper>
-              </motion.div>
+              <Paper sx={{ p: 3, display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ mr: 2, color: theme.palette.secondary.main }}>
+                  <FaMemory size={24} />
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="textSecondary">RAM</Typography>
+                  <Typography variant="h6">{(systemSpecs.memory.total / 1073741824).toFixed(1)} GB</Typography>
+                </Box>
+              </Paper>
             </Grid>
             
             <Grid item xs={12} sm={6} md={3}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <Paper sx={{ p: 3, display: 'flex', alignItems: 'center' }}>
-                  <Box sx={{ mr: 2, color: '#64ffda' }}>
-                    <FaDesktop size={24} />
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" color="textSecondary">GPU</Typography>
-                    <Typography variant="h6">{systemSpecs.graphics.controllers[0]?.model.split(' ')[0] || 'N/A'}</Typography>
-                  </Box>
-                </Paper>
-              </motion.div>
+              <Paper sx={{ p: 3, display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ mr: 2, color: theme.palette.primary.main }}>
+                  <FaDesktop size={24} />
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="textSecondary">GPU</Typography>
+                  <Typography variant="h6">{systemSpecs.graphics.controllers[0]?.model.split(' ')[0] || 'N/A'}</Typography>
+                </Box>
+              </Paper>
             </Grid>
             
             <Grid item xs={12} sm={6} md={3}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                <Paper sx={{ p: 3, display: 'flex', alignItems: 'center' }}>
-                  <Box sx={{ mr: 2, color: '#ff9e80' }}>
-                    <FaHdd size={24} />
-                  </Box>
-                  <Box>
-                    <Typography variant="body2" color="textSecondary">Storage</Typography>
-                    <Typography variant="h6">{systemSpecs.storage.length} Drives</Typography>
-                  </Box>
-                </Paper>
-              </motion.div>
+              <Paper sx={{ p: 3, display: 'flex', alignItems: 'center' }}>
+                <Box sx={{ mr: 2, color: theme.palette.secondary.main }}>
+                  <FaHdd size={24} />
+                </Box>
+                <Box>
+                  <Typography variant="body2" color="textSecondary">Storage</Typography>
+                  <Typography variant="h6">{systemSpecs.storage.length} Drives</Typography>
+                </Box>
+              </Paper>
             </Grid>
           </Grid>
           
-          {/* Main Cards */}
-          <Grid container spacing={3}>
+          {/* Main Cards - Row 1: SystemInfo and Memory */}
+          <Grid container spacing={3} mb={3} width="100%">
             <Grid item xs={12} md={6}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
-                <SystemInfoCard os={systemSpecs.os} />
-              </motion.div>
+              <SystemInfoCard os={systemSpecs.os} />
             </Grid>
-            
             <Grid item xs={12} md={6}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                <CPUCard cpu={systemSpecs.cpu} />
-              </motion.div>
+              <MemoryCard memory={systemSpecs.memory} />
             </Grid>
-            
+          </Grid>
+          
+          {/* Main Cards - Row 2: CPU and Graphics */}
+          <Grid container spacing={3} mb={3} width="100%">
             <Grid item xs={12} md={6}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-              >
-                <MemoryCard memory={systemSpecs.memory} />
-              </motion.div>
+              <CPUCard cpu={systemSpecs.cpu} />
             </Grid>
-            
             <Grid item xs={12} md={6}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-              >
-                <GraphicsCard graphics={systemSpecs.graphics} />
-              </motion.div>
+              <GraphicsCard graphics={systemSpecs.graphics} />
             </Grid>
-            
+          </Grid>
+          
+          {/* Main Cards - Row 3: Storage */}
+          <Grid container spacing={3} mb={3} width="100%">
             <Grid item xs={12}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-              >
-                <StorageCard storage={systemSpecs.storage} />
-              </motion.div>
+              <StorageCard storage={systemSpecs.storage} />
             </Grid>
-            
+          </Grid>
+          
+          {/* Main Cards - Row 4: Temperature Chart */}
+          <Grid container spacing={3} width="100%">
             <Grid item xs={12}>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.9 }}
-              >
-                <TemperatureChart data={tempData} />
-              </motion.div>
+              <TemperatureChart data={tempData} />
             </Grid>
           </Grid>
         </Container>
