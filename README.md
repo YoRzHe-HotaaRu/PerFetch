@@ -2,7 +2,6 @@
 
 A modern, responsive dashboard for monitoring and displaying PC system specifications in real-time. Built with React, Material-UI, and Node.js.
 
-![Dashboard Screenshot](https://via.placeholder.com/1200x600?text=PC+System+Dashboard+Screenshot)
 
 ## Features
 
